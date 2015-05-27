@@ -7,7 +7,7 @@
     this.board = new SnakeGame.Board();
     this.$el = $el;
     this.eventBinder();
-    this.game = setInterval(this.step.bind(this), 100);
+    this.game = setInterval(this.step.bind(this), 200);
     this.interval = 0;
     this.scores = []
   }
@@ -26,7 +26,7 @@
         clearInterval(this.game);
         $(".retry").on('click', function() {
           this.board = new SnakeGame.Board();
-          this.game = setInterval(this.step.bind(this), 100);
+          this.game = setInterval(this.step.bind(this), 200);
           this.interval = 0;
         }.bind(this))
     } else {

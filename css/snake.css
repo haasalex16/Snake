@@ -28,10 +28,9 @@ ul {
 
 li {
   float: left;
-  height: 15px;
-  width: 15px;
+  height: 60px;
+  width: 60px;
   text-align: center;
-  border: 1px solid black;
 }
 
 header {
@@ -42,25 +41,38 @@ header {
 
 .container {
   margin: auto;
-  width: 340px;
+}
+
+.snake, .snake-head, .apple {
+  background-image: url('zombie-sprite.jpg');
+  background-size: 250px 160px;
+  background-repeat: no-repeat;
 }
 
 .snake {
-  background: green;
+  background-position: -20px -10px;
 }
 
 .snake-head {
-  background: blue;
+  background-position: -90px -10px;
+}
+
+.right {
+  background-position: -20px -10px;
+}
+
+.up {
+  background-position: -155px -10px;
 }
 
 .apple {
-  background: red;
+  background-position: -155px -90px;
 }
 
 .game-board {
   position: relative;
   float:left;
-  background: black;
+  background: #343537;
 }
 
 .retry {

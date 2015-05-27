@@ -5,7 +5,7 @@
 
   var Snake = SnakeGame.Snake = function() {
     this.dir = "N";
-    this.pos = [10,10];
+    this.pos = [5,5];
     this.segments = [];
     this.snakeLength = 0;
     this.gameOver = false;
@@ -95,9 +95,9 @@
 
   Board.prototype.addApple = function() {
     if (!this.apple) {
-      var apple = [Math.floor(Math.random()*20), Math.floor(Math.random()*20)]
+      var apple = [Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
       while(equals(this.snake.pos, apple) || this.snake.intersect(apple) ) {
-        apple = [Math.floor(Math.random()*20), Math.floor(Math.random()*20)]
+        apple = [Math.floor(Math.random()*10), Math.floor(Math.random()*10)]
       }
       this.apple = apple;
     }
@@ -119,8 +119,8 @@
   }
 
   Board.prototype.createBoard = function () {
-    for(var i = 0; i < 20; i++) {
-      this.board.push(new Array(20));
+    for(var i = 0; i < 10; i++) {
+      this.board.push(new Array(10));
     }
   }
 
