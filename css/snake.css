@@ -5,6 +5,10 @@ ul, li, header, html, body, figure, section {
   outline: 0;
 }
 
+body {
+  background: #FFDA91;
+}
+
 
 ul:after {
   content: "";
@@ -77,5 +81,16 @@ header {
   color: white;
   text-align: center;
   font-size: 24px;
-  background: purple;
+  background: #BBBBBB;
+}
+
+.scores {
+  text-align: center;
+}
+.score-list-item {
+  float: none;
+  height: auto;
+  width: auto;
+  text-align: center;
+  border: none;
 }

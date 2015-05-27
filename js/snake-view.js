@@ -9,6 +9,7 @@
     this.eventBinder();
     this.game = setInterval(this.step.bind(this), 100);
     this.interval = 0;
+    this.scores = []
   }
 
   View.prototype.eventBinder = function () {
@@ -21,6 +22,7 @@
     this.interval++;
     if (this.board.snake.gameOver) {
         this.$el.append("<section class='retry'>Try Again?</section>");
+        $('.scores').append("<li class='score-list-item'> " + this.board.score + "</li>")
         clearInterval(this.game);
         $(".retry").on('click', function() {
           this.board = new SnakeGame.Board();
