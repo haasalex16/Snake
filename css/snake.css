@@ -35,3 +35,15 @@ li {
 .apple {
   background: red;
 }
+
+.game-board {
+  float:left;
+  background: black;
+}
+
+.score {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  background: purple;
+}

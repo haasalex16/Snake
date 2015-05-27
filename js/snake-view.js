@@ -8,7 +8,7 @@
     this.$el = $el;
     this.$el.html(this.board.render());
     this.eventBinder();
-    this.game = setInterval(this.step.bind(this), 100);
+    game = setInterval(this.step.bind(this), 100);
     this.interval = 0;
   }
 
@@ -27,7 +27,6 @@
       this.board.addApple();
     }
     this.drawApple();
-    console.log(this.board.score);
   }
 
   View.prototype.drawApple = function () {
@@ -70,7 +69,9 @@
         dir = "N";
         break;
     }
-    this.board.snake.dir = dir;
+    if (!this.board.snake.isOpposite(dir)) {
+      this.board.snake.dir = dir;
+    }
   };
 
 

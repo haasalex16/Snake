@@ -11,10 +11,10 @@
   };
 
   Snake.DIRECTIONS = {
+    "N": [-1, 0],
     "E": [0,  1],
     "S": [1,  0],
     "W": [0, -1],
-    "N": [-1, 0]
   };
 
   var plus = function(position, velocity) {
@@ -25,7 +25,9 @@
     return pos1[0] === pos2[0] && pos1[1] === pos2[1];
   };
 
-  var isOpposite = function(vel1, vel2) {
+  Snake.prototype.isOpposite = function(dir2) {
+    var vel1 = Snake.DIRECTIONS[this.dir];
+    var vel2 = Snake.DIRECTIONS[dir2];
     return (vel1[0] === vel2[0] * -1) && (vel1[0] === vel2[0] * -1);
   };
 
@@ -40,6 +42,15 @@
     return false;
   }
 
+  Snake.prototype.intersect = function(pos) {
+    var result = false
+    this.segments.forEach(function(position){
+      if (equals(pos, position)) {
+        result = true;
+      }
+    })
+    return result;
+  }
 
   Snake.prototype.move = function() {
     var dir = Snake.DIRECTIONS[this.dir];
@@ -48,16 +59,14 @@
       this.segments.shift(1);
     }
     this.pos = plus(this.pos, dir);
+
+
+    if (this.offBoard() || (this.intersect(this.pos))) {
+      clearInterval(game);
+      alert("Game Over");
+    }
   };
 
-  Snake.prototype.intersect = function(pos) {
-    this.segments.forEach(function(position){
-      if (equals(pos, position)) {
-        return true;
-      }
-    })
-    return false;
-  }
 
   Snake.prototype.grow = function() {
     this.snakeLength += 3;
@@ -87,7 +96,7 @@
   Board.prototype.addApple = function() {
     if (!this.apple) {
       var apple = [Math.floor(Math.random()*20), Math.floor(Math.random()*20)]
-      while(!equals(this.snake.pos, apple) && !this.snake.intersect(apple) ) {
+      while(equals(this.snake.pos, apple) || this.snake.intersect(apple) ) {
         apple = [Math.floor(Math.random()*20), Math.floor(Math.random()*20)]
       }
       this.apple = apple;
@@ -95,12 +104,9 @@
   }
 
   Board.prototype.render = function() {
-    if (this.snake.offBoard()) {
-      // alert("Game Over");
-    }
     this.eat();
 
-    var display = "";
+    var display = "<div class='score'>Score: " +this.score +"</div>";
     for (var row = 0; row < this.board.length; row++){
       display += "<ul>"
       for (var col = 0; col < this.board[0].length; col++){
@@ -108,6 +114,7 @@
       }
       display += "</ul>"
     }
+
     return display;
   }
 
