@@ -6,7 +6,10 @@
   var View = SnakeGame.View = function($el){
     this.board = new SnakeGame.Board();
     this.$el = $el;
-    setInterval(this.step, 500);
+    this.$el.html(this.board.render());
+    this.eventBinder();
+    this.game = setInterval(this.step.bind(this), 100);
+    this.interval = 0;
   }
 
   View.prototype.eventBinder = function () {
@@ -16,9 +19,35 @@
     }.bind(this))
   }
   View.prototype.step = function () {
+    this.interval++;
     this.board.snake.move();
-    this.board.render();
-    console.log(this.board.snake.pos);
+    this.$el.html(this.board.render());
+    this.drawSnake(this.board.snake.pos, this.board.snake.segments);
+    if (this.interval % 5 === 0) {
+      this.board.addApple();
+    }
+    this.drawApple();
+    console.log(this.board.score);
+  }
+
+  View.prototype.drawApple = function () {
+    if (this.board.apple) {
+      var $ul = $(this.$el.find('ul').get(this.board.apple[0]));
+      var $li = $($ul.find('li').get(this.board.apple[1]));
+      $li.addClass('apple');
+
+    }
+  };
+
+  View.prototype.drawSnake = function (pos, segments) {
+    var $ul = $(this.$el.find('ul').get(pos[0]));
+    var $li = $($ul.find('li').get(pos[1]));
+    $li.addClass('snake-head');
+    segments.forEach(function(segment){
+      var $ul = $(this.$el.find('ul').get(segment[0]));
+      var $li = $($ul.find('li').get(segment[1]));
+      $li.addClass('snake');
+    }.bind(this));
   }
 
   View.prototype.handleKeyEvent = function (keyCode) {
@@ -45,4 +74,4 @@
   };
 
 
-})
+})();

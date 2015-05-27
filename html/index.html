@@ -2,13 +2,20 @@
 <html>
   <head>
     <title>Snake</title>
+    <link rel="stylesheet" type="text/css" href="../css/snake.css">
+    <script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="../js/snake.js"></script>
+    <script type="text/javascript" src="../js/snake-view.js"></script>
   </head>
   <body>
-    <script type="text/javascript" src="../js/snake.js"></script>
-    <script type="text/javascript" src="../js/board.js"></script>
-    <script type="text/javascript" src="../js/snake-view.js"></script>
+    <figure class="game-board">
+
+    </figure>
     <script>
-      var game = new SnakeGame.View();
+    (function() {
+      new SnakeGame.View($(".game-board"));
+      alert("game on");
+    })();
     </script>
   </body>
 </html>
