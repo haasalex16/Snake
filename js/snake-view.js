@@ -6,9 +6,8 @@
   var View = SnakeGame.View = function($el){
     this.board = new SnakeGame.Board();
     this.$el = $el;
-    this.$el.html(this.board.render());
     this.eventBinder();
-    game = setInterval(this.step.bind(this), 100);
+    this.game = setInterval(this.step.bind(this), 100);
     this.interval = 0;
   }
 
@@ -20,13 +19,24 @@
   }
   View.prototype.step = function () {
     this.interval++;
-    this.board.snake.move();
-    this.$el.html(this.board.render());
-    this.drawSnake(this.board.snake.pos, this.board.snake.segments);
-    if (this.interval % 5 === 0) {
-      this.board.addApple();
+    if (this.board.snake.gameOver) {
+        this.$el.append("<section class='retry'>Try Again?</section>");
+        clearInterval(this.game);
+        $(".retry").on('click', function() {
+          this.board = new SnakeGame.Board();
+          this.game = setInterval(this.step.bind(this), 100);
+          this.interval = 0;
+        }.bind(this))
+    } else {
+      this.board.snake.move();
+      this.$el.html(this.board.render());
+      this.drawSnake(this.board.snake.pos, this.board.snake.segments);
+      if (this.interval % 5 === 0) {
+        this.board.addApple();
+      }
+      this.drawApple();
+
     }
-    this.drawApple();
   }
 
   View.prototype.drawApple = function () {
@@ -73,6 +83,7 @@
       this.board.snake.dir = dir;
     }
   };
+
 
 
 })();

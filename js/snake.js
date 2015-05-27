@@ -8,6 +8,7 @@
     this.pos = [10,10];
     this.segments = [];
     this.snakeLength = 0;
+    this.gameOver = false;
   };
 
   Snake.DIRECTIONS = {
@@ -62,8 +63,7 @@
 
 
     if (this.offBoard() || (this.intersect(this.pos))) {
-      clearInterval(game);
-      alert("Game Over");
+      this.gameOver = true;
     }
   };
 

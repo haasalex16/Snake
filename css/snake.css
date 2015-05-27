@@ -1,4 +1,4 @@
-ul, li {
+ul, li, header, html, body, figure, section {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,6 +7,12 @@ ul, li {
 
 
 ul:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.group:after {
   content: "";
   clear: both;
   display: block;
@@ -24,6 +30,17 @@ li {
   border: 1px solid black;
 }
 
+header {
+  margin: auto;
+  text-align: center;
+  font-size: 36px;
+}
+
+.container {
+  margin: auto;
+  width: 340px;
+}
+
 .snake {
   background: green;
 }
@@ -37,8 +54,23 @@ li {
 }
 
 .game-board {
+  position: relative;
   float:left;
   background: black;
+}
+
+.retry {
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: red;
+  padding: 15px;
+  font-size: 28px;
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .score {

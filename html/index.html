@@ -8,13 +8,16 @@
     <script type="text/javascript" src="../js/snake-view.js"></script>
   </head>
   <body>
-    <figure class="game-board">
+    <header>
+      Snake
+    </header>
 
-    </figure>
+    <section class="container group">
+      <figure class="game-board"></figure>
+    </section>
     <script>
     (function() {
       new SnakeGame.View($(".game-board"));
-      alert("game on");
     })();
     </script>
   </body>
