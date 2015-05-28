@@ -45,7 +45,8 @@
 
   Snake.prototype.intersect = function(pos) {
     var result = false
-    this.segments.forEach(function(position){
+    this.segments.forEach(function(segment){
+      var position = segment[0];
       if (equals(pos, position)) {
         result = true;
       }
@@ -55,7 +56,7 @@
 
   Snake.prototype.move = function() {
     var dir = Snake.DIRECTIONS[this.dir];
-    this.segments.push(this.pos);
+    this.segments.push([this.pos, this.dir]);
     if (this.snakeLength < this.segments.length) {
       this.segments.shift(1);
     }

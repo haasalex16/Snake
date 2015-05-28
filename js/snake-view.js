@@ -32,7 +32,9 @@
     } else {
       this.board.snake.move();
       this.$el.html(this.board.render());
-      this.drawSnake(this.board.snake.pos, this.board.snake.segments);
+      this.drawSnake(this.board.snake.pos,
+                    this.board.snake.dir,
+                    this.board.snake.segments);
       if (this.interval % 5 === 0) {
         this.board.addApple();
       }
@@ -50,14 +52,38 @@
     }
   };
 
-  View.prototype.drawSnake = function (pos, segments) {
+  View.prototype.drawSnake = function (pos, dir, segments) {
     var $ul = $(this.$el.find('ul').get(pos[0]));
     var $li = $($ul.find('li').get(pos[1]));
     $li.addClass('snake-head');
+    if (dir === "N") {
+      $li.addClass('up');
+    }
+    if (dir === "E") {
+      $li.addClass('right');
+    }
+    if (dir === "S") {
+      $li.addClass('down');
+    }
+    if (dir === "W") {
+      $li.addClass('left');
+    }
     segments.forEach(function(segment){
-      var $ul = $(this.$el.find('ul').get(segment[0]));
-      var $li = $($ul.find('li').get(segment[1]));
+      var $ul = $(this.$el.find('ul').get(segment[0][0]));
+      var $li = $($ul.find('li').get(segment[0][1]));
       $li.addClass('snake');
+      if (segment[1] === "N") {
+        $li.addClass('up');
+      }
+      if (segment[1]  === "E") {
+        $li.addClass('right');
+      }
+      if (segment[1]  === "S") {
+        $li.addClass('down');
+      }
+      if (segment[1]  === "W") {
+        $li.addClass('left');
+      }
     }.bind(this));
   }
 
