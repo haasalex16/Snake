@@ -19,6 +19,7 @@
     }.bind(this))
   }
   View.prototype.step = function () {
+    this.board.snake.turn = false
     this.interval++;
       this.board.snake.move();
     if (this.board.snake.gameOver) {
@@ -92,7 +93,6 @@
   }
 
   View.prototype.handleKeyEvent = function (keyCode) {
-    alert(keyCode);
     var a = 37; //97
     var s = 40; //115
     var d = 39; // 100
@@ -112,8 +112,9 @@
         dir = "N";
         break;
     }
-    if (!this.board.snake.isOpposite(dir)) {
+    if (!this.board.snake.isOpposite(dir) && !this.board.snake.turn) {
       this.board.snake.dir = dir;
+      this.board.snake.turn = true
     }
   };
 
