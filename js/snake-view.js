@@ -20,17 +20,10 @@
   }
   View.prototype.step = function () {
     this.interval++;
-    if (this.board.snake.gameOver) {
-        this.$el.append("<section class='retry'>Try Again?</section>");
-        $('.scores').append("<li class='score-list-item'> " + this.board.score + "</li>")
-        clearInterval(this.game);
-        $(".retry").on('click', function() {
-          this.board = new SnakeGame.Board();
-          this.game = setInterval(this.step.bind(this), 200);
-          this.interval = 0;
-        }.bind(this))
-    } else {
       this.board.snake.move();
+    if (this.board.snake.gameOver) {
+        this.tryAgain();
+    } else {
       this.$el.html(this.board.render());
       this.drawSnake(this.board.snake.pos,
                     this.board.snake.dir,
@@ -41,6 +34,17 @@
       this.drawApple();
 
     }
+  }
+
+  View.prototype.tryAgain = function () {
+    this.$el.append("<section class='retry'>Try Again?</section>");
+    $('.scores').append("<li class='score-list-item'> " + this.board.score + "</li>")
+    clearInterval(this.game);
+    $(".retry").on('click', function() {
+      this.board = new SnakeGame.Board();
+      this.game = setInterval(this.step.bind(this), 200);
+      this.interval = 0;
+    }.bind(this))
   }
 
   View.prototype.drawApple = function () {
@@ -88,10 +92,11 @@
   }
 
   View.prototype.handleKeyEvent = function (keyCode) {
-    var a = 65; //97
-    var s = 83; //115
-    var d = 68; // 100
-    var w = 87; // 119
+    alert(keyCode);
+    var a = 37; //97
+    var s = 40; //115
+    var d = 39; // 100
+    var w = 38; // 119
     var dir;
     switch (keyCode) {
       case a:

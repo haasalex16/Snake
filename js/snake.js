@@ -9,6 +9,7 @@
     this.segments = [];
     this.snakeLength = 0;
     this.gameOver = false;
+    this.turn = false;
   };
 
   Snake.DIRECTIONS = {
@@ -34,10 +35,10 @@
 
   Snake.prototype.offBoard = function () {
 
-    if (this.pos[0] < 0 || this.pos[0] == 20) {
+    if (this.pos[0] < 0 || this.pos[0] == 10) {
       return true;
     }
-    if (this.pos[1] < 0 || this.pos[1] == 20) {
+    if (this.pos[1] < 0 || this.pos[1] == 10) {
       return true;
     }
     return false;
@@ -70,7 +71,7 @@
 
 
   Snake.prototype.grow = function() {
-    this.snakeLength += 3;
+    this.snakeLength += 2;
   }
   // BOARD STUFF
 
